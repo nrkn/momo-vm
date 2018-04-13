@@ -1,0 +1,29 @@
+{
+  "name": "momo-vm",
+  "version": "0.1.0",
+  "description": "A VM for running a made-up assembly language",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.js",
+  "scripts": {
+    "test": "tsc && mocha ./dist/test",
+    "coverage": "tsc && nyc --reporter=html --reporter=text mocha ./dist/test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nrkn/momo-vm.git"
+  },
+  "author": "Nik Coughlin <nrkn.com@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nrkn/momo-vm/issues"
+  },
+  "homepage": "https://github.com/nrkn/momo-vm#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/mocha": "^5.0.0",
+    "@types/node": "^9.4.6",
+    "mocha": "^5.0.1",
+    "nyc": "^11.4.1",
+    "typescript": "^2.8.1"
+  }
+}
