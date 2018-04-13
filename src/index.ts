@@ -4,8 +4,8 @@ import { detokenize } from './detokenise'
 import { execute } from './execute'
 import { parse } from './parse'
 
-const Momo = {
+const MomoVM = {
   compile, decompile, detokenize, execute, parse
 }
 
-export = Momo
+export = MomoVM
