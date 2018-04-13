@@ -46,8 +46,10 @@ jmpl $3 6 $5
 
 const program = parse( sumInbox )
 
+const memory = new Int8Array( 256 )
+
 // the outbox (1 byte) followed by the inbox (5 bytes)
-const memory = new Int8Array( [ 0, 2, 3, 4, 5, 6 ] )
+memory.set( [ 0, 2, 3, 4, 5, 6 ] )
 
 execute( program, memory )
 
