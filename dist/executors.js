@@ -86,7 +86,7 @@ exports.executors = {
         const [[, outSize, inSize]] = decompiled;
         const inboxStart = getIndex(memory, inboxLocation, inboxArg);
         const inbox = memory.slice(inboxStart, inboxStart + inSize);
-        const subMemory = new Int8Array(256);
+        const subMemory = new Int32Array(256);
         for (let i = 0; i < inbox.length; i++) {
             subMemory[i + outSize] = inbox[i];
         }

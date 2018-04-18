@@ -18,7 +18,8 @@ exports.execute = (program, memory) => {
             counter = jumpLocation;
         }
         i++;
-        if (i === 256) {
+        // arbitrary
+        if (i === 65536) {
             throw Error('Too many operations');
         }
     }

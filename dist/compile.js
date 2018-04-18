@@ -11,6 +11,6 @@ exports.compile = (program) => {
         i += instr.length;
     });
     const compiled = [length, ...offsets, ...instrs];
-    return new Int8Array(compiled);
+    return new Int32Array(compiled);
 };
 //# sourceMappingURL=compile.js.map

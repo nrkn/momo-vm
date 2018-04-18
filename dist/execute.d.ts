@@ -1,1 +1,1 @@
-export declare const execute: (program: Int8Array[], memory: Int8Array) => void;
+export declare const execute: (program: Int32Array[], memory: Int32Array) => void;

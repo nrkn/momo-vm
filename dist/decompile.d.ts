@@ -1,1 +1,1 @@
-export declare const decompile: (machineCode: Int8Array) => Int8Array[];
+export declare const decompile: (machineCode: Int32Array) => Int32Array[];

@@ -15,7 +15,7 @@ const src = instruction_names_1.instructionNames.reduce((obj, name) => {
 src.indirect = fs.readFileSync(`./src/test/fixtures/indirect.asm`, 'utf8');
 const addCompiled = __1.compile(__1.parse(src.add));
 const subCompiled = __1.compile(__1.parse(src.sub));
-const callInbox = new Int8Array(addCompiled.length + subCompiled.length);
+const callInbox = new Int32Array(addCompiled.length + subCompiled.length);
 callInbox.set(addCompiled);
 callInbox.set(subCompiled, addCompiled.length);
 const addLength = addCompiled.length;
@@ -45,7 +45,7 @@ const expect = {
 const getOutbox = (asm, inbox) => {
     const parsed = __1.parse(asm);
     const [[, outSize, inSize]] = parsed;
-    const memory = new Int8Array(256);
+    const memory = new Int32Array(256);
     for (let i = 0; i < inbox.length; i++) {
         memory[i + outSize] = inbox[i];
     }
@@ -54,7 +54,7 @@ const getOutbox = (asm, inbox) => {
 };
 const run = (name) => {
     const [inArr] = expect[name];
-    const inbox = new Int8Array(inArr);
+    const inbox = new Int32Array(inArr);
     const asm = src[name];
     return getOutbox(asm, inbox);
 };
@@ -94,7 +94,7 @@ describe('location types', () => {
       copy 1 $0
       add @1 $1
     `;
-        const result = getOutbox(indirectAdd, new Int8Array());
+        const result = getOutbox(indirectAdd, new Int32Array());
         assert.deepEqual(result, [1]);
     });
 });
@@ -104,7 +104,7 @@ describe('errors', () => {
       prog 0 0
       jmp $1
     `;
-        assert.throws(() => getOutbox(tooMany, new Int8Array()));
+        assert.throws(() => getOutbox(tooMany, new Int32Array()));
     });
     it('unexpected location', () => {
         const unexpectedLocation = `
@@ -118,15 +118,15 @@ describe('errors', () => {
       prog 0 0
       add $100 $100
     `;
-        assert.throws(() => getOutbox(badIndex, new Int8Array()));
+        assert.throws(() => getOutbox(badIndex, new Int32Array()));
     });
     it('bad value', () => {
         const badValue = [
-            new Int8Array([0, 1, 2]),
-            new Int8Array([1, 3, 0, 0, 1]),
-            new Int8Array([1, 0, 0, 0, 2])
+            new Int32Array([0, 1, 2]),
+            new Int32Array([1, 3, 0, 0, 1]),
+            new Int32Array([1, 0, 0, 0, 2])
         ];
-        assert.throws(() => __1.execute(badValue, new Int8Array()));
+        assert.throws(() => __1.execute(badValue, new Int32Array()));
     });
 });
 //# sourceMappingURL=index.js.map

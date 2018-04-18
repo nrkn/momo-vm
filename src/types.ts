@@ -1,3 +1,3 @@
-export type Program = Int8Array[]
+export type Program = Int32Array[]
 
-export type MachineCode = Int8Array
+export type MachineCode = Int32Array

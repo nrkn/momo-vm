@@ -15,5 +15,5 @@ export const compile = ( program: Program ) => {
 
   const compiled = [ length, ...offsets, ...instrs ]
 
-  return new Int8Array( compiled )
+  return new Int32Array( compiled )
 }

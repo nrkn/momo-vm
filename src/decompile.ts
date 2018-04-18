@@ -19,7 +19,7 @@ export const decompile = ( machineCode: MachineCode ) => {
       instrs.slice( offset, offset + instrLen ) :
       instrs.slice( offset )
 
-    program.push( new Int8Array( instr ) )
+    program.push( new Int32Array( instr ) )
   }
 
   return program

@@ -3,7 +3,7 @@ import { DIRECT, VALUE, INDIRECT } from './location-names'
 
 export const parse = ( str: string ) => {
   const segs = str.split( /\s+/ ).filter( s => s !== '' )
-  const lines: Int8Array[] = []
+  const lines: Int32Array[] = []
 
   let line: number[] = []
   let currentInstr: string
@@ -13,7 +13,7 @@ export const parse = ( str: string ) => {
       currentInstr = seg
 
       if ( i > 0 ) {
-        lines.push( new Int8Array( line ) )
+        lines.push( new Int32Array( line ) )
         line = []
       }
 
@@ -34,7 +34,7 @@ export const parse = ( str: string ) => {
     }
   })
 
-  lines.push( new Int8Array( line ) )
+  lines.push( new Int32Array( line ) )
 
   return lines
 }

@@ -1,1 +1,1 @@
-export declare const parse: (str: string) => Int8Array[];
+export declare const parse: (str: string) => Int32Array[];

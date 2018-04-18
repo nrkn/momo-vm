@@ -1,2 +1,2 @@
-export declare type Program = Int8Array[];
-export declare type MachineCode = Int8Array;
+export declare type Program = Int32Array[];
+export declare type MachineCode = Int32Array;

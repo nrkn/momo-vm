@@ -16,7 +16,7 @@ src.indirect = fs.readFileSync( `./src/test/fixtures/indirect.asm`, 'utf8' )
 
 const addCompiled = compile( parse( src.add ) )
 const subCompiled = compile( parse( src.sub ) )
-const callInbox = new Int8Array( addCompiled.length + subCompiled.length )
+const callInbox = new Int32Array( addCompiled.length + subCompiled.length )
 
 callInbox.set( addCompiled )
 callInbox.set( subCompiled, addCompiled.length )
@@ -48,11 +48,11 @@ const expect = {
   'indirect': [ [ 2, 3, 4, 5, 6 ], [ 20 ] ]
 }
 
-const getOutbox = ( asm: string, inbox: Int8Array ): number[] => {
+const getOutbox = ( asm: string, inbox: Int32Array ): number[] => {
   const parsed = parse( asm )
   const [ [ , outSize, inSize ] ] = parsed
 
-  const memory = new Int8Array( 256 )
+  const memory = new Int32Array( 256 )
 
   for ( let i = 0; i < inbox.length; i++ ) {
     memory[ i + outSize ] = inbox[ i ]
@@ -65,7 +65,7 @@ const getOutbox = ( asm: string, inbox: Int8Array ): number[] => {
 
 const run = ( name: string ): number[] => {
   const [ inArr ] = expect[ name ]
-  const inbox = new Int8Array( inArr )
+  const inbox = new Int32Array( inArr )
   const asm = src[ name ]
 
   return getOutbox( asm, inbox )
@@ -114,7 +114,7 @@ describe( 'location types', () => {
       add @1 $1
     `
 
-    const result = getOutbox( indirectAdd, new Int8Array() )
+    const result = getOutbox( indirectAdd, new Int32Array() )
 
     assert.deepEqual( result, [ 1 ] )
   })
@@ -127,7 +127,7 @@ describe( 'errors', () => {
       jmp $1
     `
 
-    assert.throws( () => getOutbox( tooMany, new Int8Array() ))
+    assert.throws( () => getOutbox( tooMany, new Int32Array() ))
   })
 
   it( 'unexpected location', () => {
@@ -145,16 +145,16 @@ describe( 'errors', () => {
       add $100 $100
     `
 
-    assert.throws( () => getOutbox( badIndex, new Int8Array() ) )
+    assert.throws( () => getOutbox( badIndex, new Int32Array() ) )
   })
 
   it( 'bad value', () => {
     const badValue = [
-      new Int8Array([ 0, 1, 2 ]),
-      new Int8Array([ 1, 3, 0, 0, 1 ]),
-      new Int8Array([ 1, 0, 0, 0, 2 ])
+      new Int32Array([ 0, 1, 2 ]),
+      new Int32Array([ 1, 3, 0, 0, 1 ]),
+      new Int32Array([ 1, 0, 0, 0, 2 ])
     ]
 
-    assert.throws( () => execute( badValue, new Int8Array() ))
+    assert.throws( () => execute( badValue, new Int32Array() ))
   })
 })

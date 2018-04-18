@@ -1,7 +1,7 @@
 import { executors } from './executors'
 import { Program } from './types'
 
-export const execute = ( program: Program, memory: Int8Array ) => {
+export const execute = ( program: Program, memory: Int32Array ) => {
   const { length } = program
   let counter = 0
   let i = 0
@@ -20,7 +20,8 @@ export const execute = ( program: Program, memory: Int8Array ) => {
     }
 
     i++
-    if( i === 256 ) {
+    // arbitrary
+    if ( i === 65536 ) {
       throw Error( 'Too many operations' )
     }
   }

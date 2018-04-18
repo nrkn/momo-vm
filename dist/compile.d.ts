@@ -1,1 +1,1 @@
-export declare const compile: (program: Int8Array[]) => Int8Array;
+export declare const compile: (program: Int32Array[]) => Int32Array;

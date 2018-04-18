@@ -11,7 +11,7 @@ exports.parse = (str) => {
         if (instruction_names_1.instructionNames.includes(seg)) {
             currentInstr = seg;
             if (i > 0) {
-                lines.push(new Int8Array(line));
+                lines.push(new Int32Array(line));
                 line = [];
             }
             line.push(instruction_names_1.instructionNames.indexOf(seg));
@@ -34,7 +34,7 @@ exports.parse = (str) => {
             throw Error(`Unexpected token: ${seg}`);
         }
     });
-    lines.push(new Int8Array(line));
+    lines.push(new Int32Array(line));
     return lines;
 };
 //# sourceMappingURL=parse.js.map
